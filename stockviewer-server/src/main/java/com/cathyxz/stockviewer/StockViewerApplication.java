@@ -20,12 +20,11 @@ public class StockViewerApplication extends Application<StockViewerConfiguration
     public void run(final StockViewerConfiguration configuration, final Environment environment)
             throws Exception {
 
-//        final DBIFactory factory = new DBIFactory();
-//        final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(), "postgresql");
+        final DBIFactory factory = new DBIFactory();
+        final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(), "postgresql");
+        final StockViewerPostgresBackend postgresBackend = jdbi.onDemand(StockViewerPostgresBackend.class);
 
-        final StocksResource stocksResource = new StocksResource();
-
-        environment.jersey().register(stocksResource);
+        environment.jersey().register(new StocksResource(postgresBackend));
         environment.healthChecks().register("StockViewer", new StockViewerHealthCheck());
 
         LOGGER.info("Application name: {}", configuration.getAppName());
