@@ -1,7 +1,10 @@
 package com.cathyxz.stockviewer;
 
+import com.cathyxz.stockviewer.resources.StocksResource;
 import io.dropwizard.Application;
+import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Environment;
+import org.skife.jdbi.v2.DBI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,10 +21,7 @@ public class StockViewerApplication extends Application<StockViewerConfiguration
             throws Exception {
 
         final DBIFactory factory = new DBIFactory();
-        final DBI jdbi = factory.build(environment, config.getDataSourceFactory(), "postgresql");
-        final UserDAO dao = jdbi.onDemand(UserDAO.class);
-
-        environment.jersey().register(new UserResource(dao));
+        final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(), "postgresql");
 
         final StocksResource stocksResource = new StocksResource();
 
