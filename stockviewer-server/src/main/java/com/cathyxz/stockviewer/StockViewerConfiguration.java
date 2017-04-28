@@ -9,6 +9,11 @@ public class StockViewerConfiguration extends Configuration {
     @NotEmpty
     private String appName;
 
+    @Valid
+    @NotNull
+    @JsonProperty
+    private DataSourceFactory database = new DataSourceFactory();
+
     @JsonProperty
     public String getAppName() {
         return appName;
@@ -17,5 +22,11 @@ public class StockViewerConfiguration extends Configuration {
     @JsonProperty
     public void setAppName(final String appName) {
         this.appName = appName;
+    }
+
+
+
+    public DataSourceFactory getDataSourceFactory() {
+        return database;
     }
 }

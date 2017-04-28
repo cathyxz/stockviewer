@@ -17,6 +17,12 @@ public class StockViewerApplication extends Application<StockViewerConfiguration
     public void run(final StockViewerConfiguration configuration, final Environment environment)
             throws Exception {
 
+        final DBIFactory factory = new DBIFactory();
+        final DBI jdbi = factory.build(environment, config.getDataSourceFactory(), "postgresql");
+        final UserDAO dao = jdbi.onDemand(UserDAO.class);
+
+        environment.jersey().register(new UserResource(dao));
+
         final StocksResource stocksResource = new StocksResource();
 
         environment.jersey().register(stocksResource);
