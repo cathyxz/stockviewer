@@ -1,3 +1,14 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'org.jooq', name: 'jooq-codegen', version: '3.9.1'
+        classpath group: 'org.jooq', name: 'jooq-meta', version: '3.9.1'
+        classpath group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
+    }
+}
+
 plugins {
     id "application"
     id "org.flywaydb.flyway" version "4.2.0"
@@ -17,6 +28,10 @@ dependencies {
     compile group: 'io.dropwizard', name: 'dropwizard-jdbi', version: '1.1.0'
     compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.0'
     compile group: 'javax.persistence', name: 'persistence-api', version: '1.0'
+    compile group: 'org.jooq', name: 'jooq', version: '3.9.1'
+    compile group: 'org.jooq', name: 'jooq-codegen', version: '3.9.1'
+    compile group: 'org.jooq', name: 'jooq-meta', version: '3.9.1'
+
     compile group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
 
 }
@@ -26,6 +41,48 @@ flyway {
     user = 'stockviewer'
     password = '12345'
 }
+
+import javax.xml.bind.JAXB
+import org.jooq.util.GenerationTool
+
+task generateSchema() << {
+
+    final def String srcDir = file('src/main/java').canonicalPath
+    def writer = new StringWriter()
+    def xml = new groovy.xml.MarkupBuilder(writer)
+            .configuration('xmlns': 'http://www.jooq.org/xsd/jooq-codegen-3.9.0.xsd') {
+        jdbc() {
+            driver('org.postgresql.Driver')
+            url('jdbc:postgresql://localhost:5432/stockdb')
+            user('stockviewer')
+            password('12345')
+        }
+        generator() {
+            database() {
+                name('org.jooq.util.postgres.PostgresDatabase')
+                inputSchema('public')
+                excludes("schema_version")
+            }
+            generate() {
+                pojos true
+                daos true
+            }
+            target() {
+                packageName('com.cathyxz.stockviewer.jooq')
+                directory(srcDir)
+            }
+        }
+    }
+
+// Run the code generator
+// ----------------------
+    GenerationTool.main(
+            JAXB.unmarshal(new StringReader(writer.toString()), org.jooq.util.jaxb.Configuration.class)
+    )
+
+
+}
+
 
 mainClassName = "com.cathyxz.stockviewer.StockViewerApplication"
 
