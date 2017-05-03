@@ -1,13 +1,16 @@
-apply plugin: 'application'
+plugins {
+    id "application"
+    id "org.flywaydb.flyway" version "4.2.0"
+}
 
 project.ext {
     configPath = "$projectDir/config/"
-    dropwizardVersion = '0.8.2'
-}       
+}
 
 repositories {
     mavenCentral()
-}       
+}
+
 
 dependencies {
     compile group: 'io.dropwizard', name: 'dropwizard-core', version: dropwizardVersion
@@ -15,8 +18,14 @@ dependencies {
     compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.0'
     compile group: 'javax.persistence', name: 'persistence-api', version: '1.0'
     compile group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
+
 }
 
+flyway {
+    url = 'jdbc:postgresql://localhost:5432/stockdb'
+    user = 'stockviewer'
+    password = '12345'
+}
 
 mainClassName = "com.cathyxz.stockviewer.StockViewerApplication"
 
