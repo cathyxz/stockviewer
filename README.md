@@ -1,4 +1,5 @@
-# stockviewer
+# stockviewer 
+![CircleCI Badge](https://circleci.com/gh/cathyxz/stockviewer.svg?style=shield&circle-token=:circle-token)
 
 This is a sample app for testing out the following frameworks and whatever fits my fancy: 
 - Gradle
