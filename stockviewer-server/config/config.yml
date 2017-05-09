@@ -37,3 +37,17 @@ database:
 
   # the minimum amount of time an connection must sit idle in the pool before it is eligible for eviction
   minIdleTime: 1 minute
+
+server:
+  type: simple
+  applicationContextPath: /application
+  adminContextPath: /admin
+  connector:
+    type: http
+    port: 8080
+  requestLog:
+    appenders:
+      - type: file
+        currentLogFilename: var/log/stockviewer-requests.log
+        archive: false
+        timeZone: UTC
