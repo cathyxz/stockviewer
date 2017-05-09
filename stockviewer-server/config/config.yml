@@ -51,3 +51,13 @@ server:
         currentLogFilename: var/log/stockviewer-requests.log
         archive: false
         timeZone: UTC
+logging:
+  level: INFO
+  appenders:
+    - type: file
+      currentLogFilename: var/log/stockviewer.log
+      threshold: ALL
+      archive: true
+      archivedLogFilenamePattern: var/log/stockviewer-%d.log
+      archivedFileCount: 5
+      timeZone: UTC
