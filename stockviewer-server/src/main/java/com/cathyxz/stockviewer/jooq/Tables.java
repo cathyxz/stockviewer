@@ -4,7 +4,7 @@
 package com.cathyxz.stockviewer.jooq;
 
 
-import com.cathyxz.stockviewer.jooq.tables.Users;
+import com.cathyxz.stockviewer.jooq.tables.StockviewerUser;
 
 import javax.annotation.Generated;
 
@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 public class Tables {
 
     /**
-     * The table <code>public.users</code>.
+     * The table <code>public.stockviewer_user</code>.
      */
-    public static final Users USERS = com.cathyxz.stockviewer.jooq.tables.Users.USERS;
+    public static final StockviewerUser STOCKVIEWER_USER = com.cathyxz.stockviewer.jooq.tables.StockviewerUser.STOCKVIEWER_USER;
 }

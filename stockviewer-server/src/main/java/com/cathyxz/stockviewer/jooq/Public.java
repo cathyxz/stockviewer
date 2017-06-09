@@ -4,7 +4,7 @@
 package com.cathyxz.stockviewer.jooq;
 
 
-import com.cathyxz.stockviewer.jooq.tables.Users;
+import com.cathyxz.stockviewer.jooq.tables.StockviewerUser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,7 +31,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
-    private static final long serialVersionUID = -1511135341;
+    private static final long serialVersionUID = 1658471271;
 
     /**
      * The reference instance of <code>public</code>
@@ -39,9 +39,9 @@ public class Public extends SchemaImpl {
     public static final Public PUBLIC = new Public();
 
     /**
-     * The table <code>public.users</code>.
+     * The table <code>public.stockviewer_user</code>.
      */
-    public final Users USERS = com.cathyxz.stockviewer.jooq.tables.Users.USERS;
+    public final StockviewerUser STOCKVIEWER_USER = com.cathyxz.stockviewer.jooq.tables.StockviewerUser.STOCKVIEWER_USER;
 
     /**
      * No further instances allowed
@@ -68,7 +68,7 @@ public class Public extends SchemaImpl {
 
     private final List<Sequence<?>> getSequences0() {
         return Arrays.<Sequence<?>>asList(
-            Sequences.USERS_ID_SEQ);
+            Sequences.STOCKVIEWER_USER_ID_SEQ);
     }
 
     @Override
@@ -80,6 +80,6 @@ public class Public extends SchemaImpl {
 
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
-            Users.USERS);
+            StockviewerUser.STOCKVIEWER_USER);
     }
 }

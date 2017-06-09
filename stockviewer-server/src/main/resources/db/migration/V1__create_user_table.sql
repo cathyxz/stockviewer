@@ -1,4 +1,4 @@
-CREATE TABLE users (
+CREATE TABLE stockviewer_user (
     id SERIAL,
     username VARCHAR(32) NOT NULL,
     email VARCHAR(64) NOT NULL,

@@ -4,8 +4,8 @@
 package com.cathyxz.stockviewer.jooq;
 
 
-import com.cathyxz.stockviewer.jooq.tables.Users;
-import com.cathyxz.stockviewer.jooq.tables.records.UsersRecord;
+import com.cathyxz.stockviewer.jooq.tables.StockviewerUser;
+import com.cathyxz.stockviewer.jooq.tables.records.StockviewerUserRecord;
 
 import javax.annotation.Generated;
 
@@ -31,7 +31,7 @@ public class Keys {
     // IDENTITY definitions
     // -------------------------------------------------------------------------
 
-    public static final Identity<UsersRecord, Integer> IDENTITY_USERS = Identities0.IDENTITY_USERS;
+    public static final Identity<StockviewerUserRecord, Integer> IDENTITY_STOCKVIEWER_USER = Identities0.IDENTITY_STOCKVIEWER_USER;
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
@@ -48,6 +48,6 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     private static class Identities0 extends AbstractKeys {
-        public static Identity<UsersRecord, Integer> IDENTITY_USERS = createIdentity(Users.USERS, Users.USERS.ID);
+        public static Identity<StockviewerUserRecord, Integer> IDENTITY_STOCKVIEWER_USER = createIdentity(StockviewerUser.STOCKVIEWER_USER, StockviewerUser.STOCKVIEWER_USER.ID);
     }
 }
