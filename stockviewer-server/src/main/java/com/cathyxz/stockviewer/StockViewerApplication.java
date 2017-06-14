@@ -27,8 +27,6 @@ public class StockViewerApplication extends Application<StockViewerConfiguration
 
         environment.jersey().register(new StocksResource(postgresBackend));
         environment.healthChecks().register("StockViewer", new StockViewerHealthCheck());
-        environment.jersey().register(new BasicAuthProvider<User>(new BasicAuthenticator(),
-                "SUPER SECRET STUFF"));
 
         LOGGER.info("Application name: {}", configuration.getAppName());
     }
