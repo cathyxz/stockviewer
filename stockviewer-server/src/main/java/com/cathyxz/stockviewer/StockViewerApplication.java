@@ -7,6 +7,7 @@ import com.cathyxz.stockviewer.resources.StocksResource;
 import io.dropwizard.Application;
 import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
+import io.dropwizard.auth.oauth.OAuthCredentialAuthFilter;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Environment;
 import org.skife.jdbi.v2.DBI;
@@ -32,7 +33,7 @@ public class StockViewerApplication extends Application<StockViewerConfiguration
         environment.jersey().register(new StocksResource(postgresBackend));
         environment.healthChecks().register("StockViewer", new StockViewerHealthCheck());
         environment.jersey().register(new AuthDynamicFeature(
-                new BasicCredentialAuthFilter.Builder<User>()
+                new OAuthCredentialAuthFilter.Builder<User>()
                 .setAuthenticator(new StockviewerAuthenticator())
                 .setAuthorizer(new StockviewerAuthorizer())
                 .setRealm("Stuff")
