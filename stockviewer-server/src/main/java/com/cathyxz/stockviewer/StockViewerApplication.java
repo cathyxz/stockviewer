@@ -5,10 +5,12 @@ import com.cathyxz.stockviewer.auth.StockviewerAuthorizer;
 import com.cathyxz.stockviewer.models.User;
 import com.cathyxz.stockviewer.resources.StocksResource;
 import io.dropwizard.Application;
+import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.auth.oauth.OAuthCredentialAuthFilter;
 import io.dropwizard.jdbi.DBIFactory;
+import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.skife.jdbi.v2.DBI;
 import org.slf4j.Logger;
@@ -23,6 +25,11 @@ public class StockViewerApplication extends Application<StockViewerConfiguration
     }
 
     @Override
+    public void initialize(Bootstrap<StockViewerConfiguration> bootstrap) {
+        bootstrap.addBundle(new AssetsBundle("/assets", "/", "index.html"));
+    }
+
+    @Override
     public void run(final StockViewerConfiguration configuration, final Environment environment)
             throws Exception {
 
@@ -32,6 +39,9 @@ public class StockViewerApplication extends Application<StockViewerConfiguration
 
         environment.jersey().register(new StocksResource(postgresBackend));
         environment.healthChecks().register("StockViewer", new StockViewerHealthCheck());
+
+        environment.jersey().setUrlPattern("/api/*");
+
         environment.jersey().register(new AuthDynamicFeature(
                 new OAuthCredentialAuthFilter.Builder<User>()
                 .setAuthenticator(new StockviewerAuthenticator())
