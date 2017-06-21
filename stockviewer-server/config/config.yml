@@ -1,16 +1,9 @@
 appName: StockViewer
 
 database:
-  # the name of your JDBC driver
   driverClass: org.postgresql.Driver
-
-  # the username
   user: stockviewer
-
-  # the password
   password: 12345
-
-  # the JDBC URL
   url: jdbc:postgresql://localhost:5432/stockdb
 
   # any properties specific to your JDBC driver:
@@ -38,7 +31,11 @@ database:
   # the minimum amount of time an connection must sit idle in the pool before it is eligible for eviction
   minIdleTime: 1 minute
 
+assets:
+  overrides:
+    /: public/
 server:
+  rootpath: '/api/*'
   type: simple
   applicationContextPath: /application
   adminContextPath: /admin

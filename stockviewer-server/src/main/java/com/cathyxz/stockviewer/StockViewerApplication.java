@@ -26,7 +26,7 @@ public class StockViewerApplication extends Application<StockViewerConfiguration
 
     @Override
     public void initialize(Bootstrap<StockViewerConfiguration> bootstrap) {
-        bootstrap.addBundle(new AssetsBundle("/assets", "/", "index.html"));
+        bootstrap.addBundle(new AssetsBundle("/assets", "/"));
     }
 
     @Override
