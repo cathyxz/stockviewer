@@ -34,8 +34,10 @@ database:
 assets:
   overrides:
     /: public/
+
 server:
-  rootpath: '/api/*'
+
+  rootPath: '/api/*'
   type: simple
   applicationContextPath: /application
   adminContextPath: /admin

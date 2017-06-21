@@ -5,10 +5,9 @@ import com.cathyxz.stockviewer.auth.StockviewerAuthorizer;
 import com.cathyxz.stockviewer.models.User;
 import com.cathyxz.stockviewer.resources.StocksResource;
 import io.dropwizard.Application;
-import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.auth.AuthDynamicFeature;
-import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.auth.oauth.OAuthCredentialAuthFilter;
+import io.dropwizard.bundles.assets.ConfiguredAssetsBundle;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -26,7 +25,7 @@ public class StockViewerApplication extends Application<StockViewerConfiguration
 
     @Override
     public void initialize(Bootstrap<StockViewerConfiguration> bootstrap) {
-        bootstrap.addBundle(new AssetsBundle("/assets", "/"));
+        bootstrap.addBundle(new ConfiguredAssetsBundle());
     }
 
     @Override
