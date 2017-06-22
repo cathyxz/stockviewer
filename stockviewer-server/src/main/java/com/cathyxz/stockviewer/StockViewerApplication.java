@@ -25,7 +25,7 @@ public class StockViewerApplication extends Application<StockViewerConfiguration
 
     @Override
     public void initialize(Bootstrap<StockViewerConfiguration> bootstrap) {
-        bootstrap.addBundle(new ConfiguredAssetsBundle());
+        bootstrap.addBundle(new ConfiguredAssetsBundle("/assets/", "/", "index.html"));
     }
 
     @Override
@@ -38,9 +38,6 @@ public class StockViewerApplication extends Application<StockViewerConfiguration
 
         environment.jersey().register(new StocksResource(postgresBackend));
         environment.healthChecks().register("StockViewer", new StockViewerHealthCheck());
-
-        environment.jersey().setUrlPattern("/api/*");
-
         environment.jersey().register(new AuthDynamicFeature(
                 new OAuthCredentialAuthFilter.Builder<User>()
                 .setAuthenticator(new StockviewerAuthenticator())
